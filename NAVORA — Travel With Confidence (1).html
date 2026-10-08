@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NAVORA — Travel With Confidence</title>
+<meta name="description" content="NAVORA is an AI-powered unified and adaptive travel intelligence platform that understands the journey, simulates change, and helps travelers adapt with confidence.">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#050505;--g:#0b0b0d;--g2:#121214;--ink:#f5f3ee;--mut:#8f8c85;--sand:#d9d4c8;--gold:#d8bf8c;--hl:rgba(245,243,238,.08);--e:cubic-bezier(.16,.84,.24,1);color-scheme:dark}
+html{scroll-behavior:smooth}*,*:before,*:after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"SF Pro Display",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{margin:0;font-weight:600;text-transform:uppercase;letter-spacing:-.045em;line-height:.98}
+#glow{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(520px circle at var(--x,50%) var(--y,30%),rgba(216,191,140,.07),transparent 65%)}
+section{position:relative;z-index:1;padding:22vh 7vw;max-width:1360px;margin:auto}
+.eb{font-size:11px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:28px}
+h2{font-size:clamp(38px,7vw,104px)}
+.sub{color:var(--mut);font-size:clamp(15px,1.5vw,19px);max-width:480px;line-height:1.55;margin:26px 0 0}
+em{font-style:normal;color:var(--gold)}
+.btn{display:inline-flex;gap:12px;align-items:center;padding:17px 30px;border-radius:99px;font:600 12px/1 inherit;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:#0b0b0b;background:var(--ink);border:1px solid transparent;cursor:pointer;transition:filter .5s,transform .4s var(--e),background .5s}
+.btn:hover{filter:drop-shadow(0 0 22px rgba(216,191,140,.45))}.btn.o{background:none;color:var(--ink);border-color:rgba(245,243,238,.18)}
+a:focus-visible,button:focus-visible{outline:1px solid var(--gold);outline-offset:4px}
+.rv{opacity:0;transform:translateY(46px);filter:blur(6px);transition:opacity 1.2s var(--e),transform 1.2s var(--e),filter 1.2s var(--e)}.rv.in{opacity:1;transform:none;filter:none}
+.glass{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.012));border:1px solid rgba(245,243,238,.07);border-radius:14px;backdrop-filter:blur(22px);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:18px 5vw;transition:background .6s,backdrop-filter .6s}
+nav.s{background:rgba(5,5,5,.72);backdrop-filter:blur(20px)}nav b{letter-spacing:.34em;font-size:13px}
+nav .links{display:flex;gap:34px}nav .links a{color:var(--mut);font-size:11px;letter-spacing:.2em;text-decoration:none;text-transform:uppercase;padding:6px 0;border-bottom:1px solid transparent;transition:.4s}nav .links a.a{color:var(--ink);border-color:var(--gold)}
+nav .r{display:flex;gap:14px;align-items:center}#mb{display:none;background:none;border:1px solid rgba(245,243,238,.18);color:var(--ink);border-radius:99px;width:40px;height:40px;font-size:16px}
+#bar{position:fixed;top:0;left:0;height:1px;width:0;background:var(--gold);z-index:70}
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;max-width:none;overflow:hidden;padding-top:16vh}
+#cv{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+#hero h1{font-size:clamp(64px,17vw,250px);letter-spacing:-.065em;background:linear-gradient(#f5f3ee 40%,rgba(245,243,238,.25));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{font-size:clamp(11px,1.4vw,15px);letter-spacing:.5em;color:var(--gold);margin:6px 0 9vh}
+#hero h3{font-size:clamp(22px,3.8vw,52px);font-weight:500;letter-spacing:-.03em;line-height:1.08}#hero h3 u{text-decoration:none;color:var(--gold)}
+.cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:44px}
+.sc{position:relative;z-index:1}.stk{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 6vw;overflow:hidden}
+.big{font-size:clamp(46px,11vw,170px);font-weight:600;letter-spacing:-.06em;text-transform:uppercase;line-height:.95;transition:opacity .6s var(--e),transform 1s var(--e),filter .6s}
+.cap{font-size:clamp(11px,1.3vw,15px);letter-spacing:.28em;color:var(--mut);margin-top:26px;max-width:560px;text-transform:uppercase;line-height:1.7;transition:opacity .6s,transform 1s var(--e)}
+.sw{opacity:0!important;transform:scale(.94) translateY(20px);filter:blur(12px)}.cap.sw{transform:translateY(12px)}
+.src{position:absolute;bottom:4vh;font-size:10px;letter-spacing:.18em;color:#55534e;padding:0 6vw}
+#fi div{position:absolute;left:50%;top:50%;padding:11px 20px;border:1px solid rgba(245,243,238,.14);border-radius:99px;font-size:11px;letter-spacing:.24em;color:var(--sand);background:rgba(5,5,5,.6);will-change:transform}
+#fh{position:absolute;top:50%;width:90%;transform:translateY(-50%);font-size:clamp(34px,7vw,100px);font-weight:600;letter-spacing:-.05em;text-transform:uppercase;line-height:1;transition:opacity .6s,filter .6s}
+#fj{position:absolute;opacity:0;color:var(--gold)}
+#cj{display:grid;grid-template-columns:1fr 1.3fr;gap:5vw;align-items:center}svg{overflow:visible;width:100%;height:auto;display:block}
+svg text{font-family:inherit;fill:var(--ink);letter-spacing:.2em;font-size:10px}.fl{stroke-dasharray:3 9;animation:d 4s linear infinite}@keyframes d{to{stroke-dashoffset:-48}}
+.bp path{stroke-dasharray:420;stroke-dashoffset:420;transition:stroke-dashoffset 2.4s var(--e) var(--d)}.go .bp path{stroke-dashoffset:0}
+.bp text{opacity:0;transition:opacity 1.4s var(--d)}.go .bp text{opacity:1}
+.rg{animation:pl 6s ease-in-out infinite}@keyframes pl{50%{opacity:.35}}
+.tw{display:grid;grid-template-columns:1.1fr .9fr;gap:5vw;width:min(1200px,100%);text-align:left;align-items:center}
+#stg{transform-origin:50% 40%;will-change:transform}
+.ev{display:flex;gap:18px;padding:18px 4px;border-bottom:1px solid var(--hl);align-items:baseline;transition:all 1s var(--e);font-size:clamp(15px,1.6vw,20px)}.ev small{width:76px;font-size:11px;letter-spacing:.14em;color:var(--mut)}
+.ev.hit{color:var(--gold);padding-left:18px;background:linear-gradient(90deg,rgba(216,191,140,.12),transparent);animation:pl 2.4s infinite}
+#wx{font-size:11px;letter-spacing:.24em;color:var(--gold);margin:16px 0 0;opacity:0;transition:opacity 1s}
+#chain{list-style:none;padding:0 0 0 22px;margin:0;border-left:1px solid var(--hl)}#chain li{padding:14px 0;font-size:12px;letter-spacing:.24em;color:#4a4945;transition:color 1s,transform 1s var(--e);position:relative}
+#chain li:before{content:"";position:absolute;left:-26px;top:50%;width:7px;height:7px;border-radius:50%;background:#2a2a2a;transition:.8s}#chain li.on{color:var(--ink);transform:translateX(10px)}#chain li.on:before{background:var(--gold);box-shadow:0 0 14px var(--gold)}
+#th{position:absolute;bottom:9vh;font-size:clamp(26px,4.4vw,64px);left:0;right:0;transition:opacity .6s,filter .6s}
+#pr{position:absolute;top:13vh;font-size:11px;letter-spacing:.26em;color:var(--gold);border:1px solid rgba(216,191,140,.35);padding:10px 18px;border-radius:99px;opacity:0;transition:opacity 1s}
+.ill{font-size:10px;letter-spacing:.24em;color:var(--mut);margin-bottom:18px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:44px 0 26px}.tabs button{background:none;color:var(--mut);border:1px solid rgba(245,243,238,.12);border-radius:99px;padding:11px 18px;font:500 12px inherit;letter-spacing:.06em;cursor:pointer;transition:.5s}.tabs button.a{color:#0b0b0b;background:var(--ink)}
+#sim{padding:clamp(22px,4vw,64px);min-height:560px}#prompt{font-size:clamp(26px,5vw,68px);letter-spacing:-.04em;text-transform:uppercase;font-weight:600;line-height:1;min-height:2.1em}#prompt:after{content:"";display:inline-block;width:2px;height:.8em;background:var(--gold);margin-left:6px;animation:pl 1s infinite}
+#an{display:flex;gap:14px;align-items:center;font-size:11px;letter-spacing:.24em;color:var(--gold);min-height:34px;opacity:0;transition:opacity .5s}#an svg{width:22px;animation:rot 1.4s linear infinite}@keyframes rot{to{transform:rotate(360deg)}}
+#an span.t{color:var(--mut);letter-spacing:.16em}
+#opts{position:relative;margin:20px 0 0 12px;padding-left:28px;border-left:1px solid rgba(216,191,140,.4);display:grid;gap:12px}
+.op{position:relative;text-align:left;color:inherit;font:inherit;padding:18px 22px;cursor:pointer;opacity:0;transform:translateX(-20px);transition:all 1s var(--e);display:grid;grid-template-columns:1.1fr 2fr;gap:12px;align-items:center;max-height:200px}
+.op:before{content:"";position:absolute;left:-28px;top:50%;width:28px;border-top:1px solid rgba(216,191,140,.4)}.op.in{opacity:1;transform:none}.op.a{border-color:rgba(216,191,140,.6);background:linear-gradient(160deg,rgba(216,191,140,.14),rgba(216,191,140,.02))}.op.off{opacity:0;max-height:0;padding:0;margin:-6px 0;overflow:hidden;border:0}
+.op b{font-size:10px;letter-spacing:.26em;color:var(--gold);display:block;margin-bottom:6px}.op h4{font-size:19px;letter-spacing:-.02em}
+.mt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:10px;letter-spacing:.16em;color:var(--mut)}.mt i{display:block;font-style:normal;font-size:14px;letter-spacing:0;color:var(--ink);margin-top:4px}
+#cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}#cmp div{padding:18px 20px;border-radius:12px;border:1px solid var(--hl);font-size:14px;line-height:1.6}#cmp small{display:block;letter-spacing:.24em;font-size:10px;color:var(--mut);margin-bottom:6px}#cmp .n{border-color:rgba(216,191,140,.5)}
+.note{font-size:11px;letter-spacing:.1em;color:var(--mut);margin-top:16px;line-height:1.6}
+#stay{display:grid;grid-template-columns:1fr 1.2fr;gap:5vw;align-items:center}
+.fw{display:flex;gap:8px;flex-wrap:wrap;margin:34px 0 0;font-size:11px;letter-spacing:.2em;color:var(--mut);text-transform:uppercase}.fw span:not(:last-child):after{content:"→";margin-left:8px;color:var(--gold)}
+#loop{text-align:center;max-width:1100px}
+#demo{text-align:center}#dev{perspective:1600px;margin:9vh auto 6vh;position:relative;max-width:900px}
+.bw{transform:rotateY(-12deg) rotateX(6deg);transition:transform .8s var(--e);overflow:hidden;box-shadow:0 60px 140px -40px rgba(216,191,140,.12)}
+.tb{padding:14px 18px;text-align:left;font-size:11px;letter-spacing:.1em;color:var(--mut);border-bottom:1px solid var(--hl)}.bd2{padding:8% 8% 10%}
+.ph{position:absolute;right:-3%;bottom:-12%;width:23%;aspect-ratio:9/18;border-radius:26px;transform:translateZ(80px) rotateY(-12deg);padding:12px;display:flex;align-items:center}
+.rp{font-size:10px;letter-spacing:.3em;color:var(--gold);display:block;margin-bottom:20px}
+#vs{display:grid;grid-template-columns:1fr 1fr;gap:6vw;margin:12vh 0}#vs h3{font-size:11px;letter-spacing:.3em;color:var(--mut);margin-bottom:26px;font-weight:500}
+#vs p{margin:0;font-size:clamp(30px,4.6vw,68px);letter-spacing:-.05em;text-transform:uppercase;font-weight:600;line-height:1.08}#vs .t p{color:#4c4a46}#vs .t p:nth-child(even){text-decoration:line-through;text-decoration-thickness:1px}
+.dbp{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;letter-spacing:.22em;margin:30px 0}.dbp span{padding:9px 16px;border:1px solid rgba(245,243,238,.12);border-radius:99px;color:var(--mut)}.dbp .n{color:var(--gold);border-color:rgba(216,191,140,.4)}
+.dot{display:block;width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 60px 20px rgba(216,191,140,.35);margin:auto}
+#fb{margin-top:46px;opacity:0;pointer-events:none;transition:opacity 2s var(--e),filter 2s}#fb.on{opacity:1;pointer-events:auto;filter:drop-shadow(0 0 30px rgba(216,191,140,.5))}
+footer{text-align:center;padding:40px 6vw;color:#55534e;font-size:11px;letter-spacing:.34em;position:relative;z-index:1}
+@media(max-width:820px){nav .links{display:none;position:absolute;top:100%;left:4vw;right:4vw;flex-direction:column;gap:6px;padding:18px;background:rgba(11,11,13,.94);backdrop-filter:blur(20px);border-radius:16px}nav .links.o{display:flex}#mb{display:block}nav .r .btn{display:none}
+section{padding:16vh 7vw}#cj,#stay,#vs,.tw{grid-template-columns:1fr}.tw{gap:18px}#chain li{padding:7px 0}#cmp{grid-template-columns:1fr}.op{grid-template-columns:1fr}.ph{display:none}.bw{transform:none}.ev{padding:12px 4px}#th{bottom:6vh}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}html{scroll-behavior:auto}}
+
+/* ===== NEXT LEVEL LAYER ===== */
+#amb{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(55vw 55vh at calc(15% + var(--p,0)*70%) calc(85% - var(--p,0)*70%),rgba(216,191,140,.075),transparent 70%),radial-gradient(40vw 40vh at calc(90% - var(--p,0)*60%) 10%,rgba(245,243,238,.025),transparent 70%)}
+#vg{position:fixed;inset:0;z-index:84;pointer-events:none;background:radial-gradient(120% 90% at 50% 50%,transparent 55%,rgba(0,0,0,.55))}
+#gr{position:fixed;inset:0;z-index:85;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:gr .9s steps(3) infinite}@keyframes gr{to{background-position:70px 40px}}
+#ld{position:fixed;inset:0;z-index:100;background:#050505;display:grid;place-items:center;transition:opacity 1.2s var(--e),visibility 1.2s}#ld.x{opacity:0;visibility:hidden}
+#ld b{font-size:clamp(20px,4vw,40px);letter-spacing:.9em;margin-right:-.9em;font-weight:500;animation:lb 1.8s var(--e) both}#ld i{position:absolute;bottom:42vh;width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform-origin:left;animation:ln 1.8s var(--e) both}
+@keyframes lb{from{opacity:0;letter-spacing:1.6em;filter:blur(12px)}to{opacity:1;letter-spacing:.9em;filter:none}}@keyframes ln{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+#hero h1{opacity:0;scale:var(--hsc,1)}.rd #hero h1{animation:hi 2.6s var(--e) .2s forwards}
+@keyframes hi{from{opacity:0;letter-spacing:.06em;filter:blur(24px);transform:translateY(40px)}to{opacity:1;letter-spacing:-.065em;filter:none;transform:none}}
+.hh{opacity:0}.rd .hh{animation:up 1.6s var(--e) forwards;animation-delay:calc(var(--d)*1s + .6s)}@keyframes up{from{opacity:0;transform:translateY(34px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+#hero>*:not(canvas){translate:0 calc(var(--hy,0)*-.28px);filter:blur(calc(var(--hb,0)*1px))}#cv{translate:var(--mx2,0) var(--my2,0);opacity:calc(1 - var(--hb,0)*.05)}
+h2.rv{transform:none;filter:none}.w{display:inline-block;overflow:hidden;vertical-align:top;padding:.04em .02em .1em;margin:-.04em -.02em -.1em}.w>i{display:inline-block;font-style:inherit;transform:translateY(112%) rotate(4deg);transition:transform 1.3s var(--e) calc(var(--i)*65ms)}.in .w>i{transform:none}
+.stk{transform:skewY(var(--sk,0deg))}
+.glass{background:radial-gradient(280px circle at var(--mx,50%) var(--my,-60%),rgba(216,191,140,.13),transparent 70%),linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.012))}
+#cur{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1px solid rgba(216,191,140,.55);border-radius:50%;pointer-events:none;z-index:90;transition:width .5s var(--e),height .5s var(--e),margin .5s var(--e),background .5s,opacity .4s;opacity:0}#cur.on{opacity:1}#cur.h{width:70px;height:70px;margin:-35px 0 0 -35px;background:rgba(216,191,140,.1)}
+body.cc,body.cc a,body.cc button{cursor:none}
+#rail{position:fixed;right:14px;top:50%;translate:0 -50%;display:flex;flex-direction:column;z-index:55}#rail a{width:20px;height:20px;padding:7px;background:rgba(245,243,238,.25);background-clip:content-box;border-radius:50%;position:relative;transition:.5s var(--e)}#rail a.a{background-color:var(--gold);scale:1.5}
+#rail a:after{content:attr(data-l);position:absolute;right:24px;top:50%;translate:0 -50%;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);opacity:0;transition:.4s;white-space:nowrap;pointer-events:none}#rail a:hover:after{opacity:1}
+.big,.cap{will-change:transform,opacity}
+@media(max-width:820px){#rail{display:none}#cur{display:none}}
+@media(prefers-reduced-motion:reduce){#hero h1,.hh{opacity:1!important}.w>i{transform:none}#gr{display:none}}
+</style></head><body>
+<div id="ld"><i></i><b>NAVORA</b></div><div id="amb"></div><div id="vg"></div><div id="gr"></div><div id="cur"></div><nav id="rail" aria-label="Story chapters"></nav><div id="bar"></div><div id="glow"></div>
+<nav id="nav"><b>NAVORA</b><div class="links" id="lk"><a href="#diff">Product</a><a href="#brain">Intelligence</a><a href="#demo">Demo</a></div><div class="r"><a class="btn mg" style="padding:12px 20px;font-size:10px" href="https://plan-my-tripp.vercel.app/">Try Navora →</a><button id="mb" aria-label="Menu" aria-expanded="false">≡</button></div></nav>
+<main>
+<section id="hero"><canvas id="cv" aria-hidden="true"></canvas>
+<h1>Navora</h1><div class="tag">TRAVEL WITH CONFIDENCE</div>
+<h3>The travel plan<br>that <u>understands</u><br>the journey.</h3>
+<div class="cta"><a class="btn mg" href="https://plan-my-tripp.vercel.app/">Explore Navora →</a><a class="btn o mg" href="#stats">See how it works ↓</a></div></section>
+
+<div class="sc" id="stats" data-n="7"><div class="stk"><div class="big" id="sn"></div><div class="cap" id="sl"></div><div class="src">SOURCE: MINISTRY OF TOURISM, GOVERNMENT OF INDIA — INDIA TOURISM DASHBOARD, 2025. TOURISM SCALE, NOT NAVORA USERS.</div></div></div>
+
+<div class="sc" id="frag" data-n="4"><div class="stk"><div id="fh"></div><div id="fi" aria-hidden="true"></div><div class="big" id="fj">Journey</div><div class="cap" id="fs" style="position:absolute;bottom:22vh;opacity:0;color:var(--sand)">One connected journey</div></div></div>
+
+<div class="sc" id="diff" data-n="4"><div class="stk"><span class="eb">The Navora difference</span><div class="big" id="dw" style="font-size:clamp(40px,9vw,140px)"></div></div></div>
+
+<section id="cj"><div><span class="eb rv">One connected journey</span><h2 class="rv">One journey.<br>Not ten apps.</h2><p class="sub rv">Everything relevant to the trip stays connected to the same Journey. Touch it — it responds.</p></div>
+<svg id="cjs" viewBox="0 0 600 520" role="img" aria-label="Journey connected to traveler, itinerary, weather, hotel, map, transport, budget and safety"></svg></section>
+
+<section id="brain"><span class="eb rv">Information → Context → Understanding</span><h2 class="rv">Navora<br>Travel Brain</h2><p class="sub rv">Invisible intelligence, made visible. Separate signals resolve into one understanding of the journey.</p>
+<svg id="bs" viewBox="0 0 900 440" style="margin-top:6vh" role="img" aria-label="Seven inputs converge into the Travel Brain, producing understanding"></svg></section>
+
+<div class="sc" id="twin" data-n="6"><div class="stk"><div id="pr">WHAT IF IT RAINS TOMORROW? →</div>
+<div class="tw" id="stg"><div><div class="ill">ILLUSTRATIVE JOURNEY · GOA · 3 DAYS · 2 TRAVELERS · ₹30,000</div><div style="font-size:11px;letter-spacing:.3em;color:var(--gold);margin-bottom:8px">DAY 02</div>
+<div class="ev"><small>10:00 AM</small><span>Fort / Heritage Visit</span></div><div class="ev"><small>1:00 PM</small><span>Lunch</span></div><div class="ev" id="e3"><small>3:00 PM</small><span id="e3t">Outdoor Activity</span></div><div class="ev"><small id="e4s">6:30 PM</small><span id="e4t">Hotel</span></div><div id="wx">WEATHER · HEAVY RAIN EXPECTED</div></div>
+<ul id="chain"><li>Rain</li><li>Outdoor activity</li><li>Time</li><li>Route</li><li>Dinner</li><li>Hotel arrival</li></ul></div>
+<h2 id="th"></h2></div></div>
+
+<section id="whatif"><span class="eb rv">What-If simulator</span><h2 class="rv">Simulate before<br>you change.</h2>
+<div class="tabs" role="tablist" id="tabs"></div>
+<div class="glass" id="sim"><div class="ill">ILLUSTRATIVE SIMULATION · NOT LIVE PROVIDER PRICES</div><div id="prompt" aria-live="polite"></div>
+<div id="an"><svg viewBox="0 0 24 24" fill="none" stroke="#d8bf8c" stroke-width="1.5"><circle cx="12" cy="12" r="9" stroke-opacity=".25"/><path d="M12 3a9 9 0 0 1 9 9"/></svg><span id="at">ANALYZING JOURNEY…</span></div>
+<div id="opts"></div><div id="cmp"></div>
+<button class="btn" id="apply" style="display:none">Apply →</button><div class="note" id="st"></div></div></section>
+
+<section id="stay"><div><span class="eb rv">Accommodation</span><h2 class="rv" style="font-size:clamp(34px,5.6vw,84px)">Your stay isn't a separate booking.<br><em>It's part of the journey.</em></h2>
+<div class="fw rv"><span>Search</span><span>Compare</span><span>Recheck</span><span>Book</span><span>Journey</span></div><p class="sub rv">Provider data rechecked before confirmation.</p></div>
+<svg id="sv" viewBox="0 0 640 440" role="img" aria-label="Hotel connects to location, time, budget, route and itinerary, becoming part of the journey"></svg></section>
+
+<section id="loop"><span class="eb rv">The intelligence loop</span><h2 class="rv">From static itinerary<br>to adaptive journey.</h2>
+<svg id="ls" viewBox="0 0 760 400" style="margin-top:8vh" role="img" aria-label="Continuous loop: plan, understand, detect, analyze, simulate, recommend, approve, adapt"></svg></section>
+
+<section id="demo"><span class="eb rv">Real product</span><h2 class="rv">See Navora<br>in action.</h2>
+<div id="dev" class="rv"><div class="bw glass"><div class="tb">plan-my-tripp.vercel.app</div><div class="bd2"><svg viewBox="0 0 500 180"><path class="fl" d="M20 140 C120 20 200 160 280 80 S420 30 480 70" fill="none" stroke="#d8bf8c" stroke-opacity=".6"/><g fill="#d8bf8c"><circle cx="20" cy="140" r="4"/><circle cx="280" cy="80" r="4"/><circle cx="480" cy="70" r="4"/></g></svg></div></div><div class="ph glass"><svg viewBox="0 0 60 120"><path class="fl" d="M10 100 C10 40 50 80 50 20" fill="none" stroke="#d8bf8c" stroke-opacity=".6"/></svg></div></div>
+<a class="btn mg" href="https://plan-my-tripp.vercel.app/">Launch live demo →</a></section>
+
+<section id="vs2"><span class="eb rv">Why it's different</span><h2 class="rv" style="font-size:clamp(34px,6vw,90px)">Others help you plan the trip.<br><em>Navora helps you manage the journey.</em></h2>
+<div id="vs"><div class="t rv"><h3>TRADITIONAL TRAVEL</h3><p>Fragmented</p><p>Static</p><p>Reactive</p><p>Manual</p></div><div class="rv"><h3 style="color:var(--gold)">NAVORA</h3><p>Connected</p><p>Contextual</p><p>Adaptive</p><p>Intelligent</p></div></div>
+<p class="sub rv" style="max-width:640px">Travel platforms already help users <b style="color:var(--ink)">discover, book and plan</b>. Navora adds the layer above:</p>
+<div class="dbp rv"><span>DISCOVER</span><span>BOOK</span><span>PLAN</span><span class="n">+ UNDERSTAND</span><span class="n">SIMULATE</span><span class="n">ADAPT</span></div>
+<p class="sub rv" style="max-width:640px">India is already moving toward intelligent digital tourism — including AI personalization, real-time weather and service integrations on the Incredible India Digital Platform. Navora explores the next layer: adaptive journey intelligence.</p></section>
+
+<div class="sc" id="fin" data-n="6"><div class="stk"><div class="big" id="fn"></div><div class="cap" id="fc"></div><a class="btn mg" id="fb" href="https://plan-my-tripp.vercel.app/">Explore Navora →</a></div></div>
+</main>
+<footer>NAVORA · TRAVEL WITH CONFIDENCE</footer>
+<script>
+const $=s=>document.querySelector(s),RM=matchMedia('(prefers-reduced-motion:reduce)').matches,cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),NS='http://www.w3.org/2000/svg';
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.15});document.querySelectorAll('.rv').forEach(e=>io.observe(e));
+function swap(el,h){if(el.dataset.h===h)return;el.dataset.h=h;el.classList.add('sw');setTimeout(()=>{el.innerHTML=h;el.classList.remove('sw')},RM?0:450)}
+// nav
+$('#mb').onclick=()=>{const o=$('#lk').classList.toggle('o');$('#mb').setAttribute('aria-expanded',o)};$('#lk').onclick=()=>$('#lk').classList.remove('o');
+const lk=[...document.querySelectorAll('.links a')];
+// glow + magnetic
+addEventListener('pointermove',e=>{$('#glow').style.setProperty('--x',e.clientX+'px');$('#glow').style.setProperty('--y',e.clientY+'px')});
+document.querySelectorAll('.mg').forEach(b=>{b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.12}px,${(e.clientY-r.top-r.height/2)*.2}px)`});b.addEventListener('pointerleave',()=>b.style.transform='')});
+const dv=$('#dev');dv.addEventListener('pointermove',e=>{if(innerWidth<821)return;const r=dv.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;$('.bw').style.transform=`rotateY(${-12+x*10}deg) rotateX(${6-y*8}deg)`});
+// scenes
+const sc=[];function scene(id,fn){const e=$(id),n=+e.dataset.n;e.style.height=`calc(100vh + ${n*75}vh)`;sc.push({e,n,fn})}
+let tk=0;function onS(){const h=document.documentElement;$('#bar').style.width=scrollY/(h.scrollHeight-innerHeight)*100+'%';$('#nav').classList.toggle('s',scrollY>40);
+sc.forEach(s=>{const r=s.e.getBoundingClientRect();if(r.top>innerHeight||r.bottom<0)return;s.fn(cl(-r.top/(r.height-innerHeight)),Math.min(s.n-1,Math.floor(cl(-r.top/(r.height-innerHeight),0,.999)*s.n)))});
+lk.forEach(a=>{const r=$(a.hash).getBoundingClientRect(),b=a.hash=='#diff'?$('#cj').getBoundingClientRect().top:r.bottom;a.classList.toggle('a',r.top<innerHeight*.5&&b>innerHeight*.3)})}
+addEventListener('scroll',()=>{if(!tk)tk=requestAnimationFrame(()=>{tk=0;onS()})},{passive:true});
+// stats
+const ST=[["4.287 BILLION","DOMESTIC TOURIST VISITS<br>INDIA • 2025"],["20.22 MILLION","INTERNATIONAL TOURIST ARRIVALS<br>INDIA • 2025"],["5.22%","TOURISM'S SHARE OF GDP"],["84.63 MILLION","TOURISM JOBS"],["Travel is big.","When travel happens at this scale, fragmented planning becomes a systems problem."],["Travel is complex.","Every journey is different."],["<span style='font-size:.4em;display:block;line-height:1.1'>Navora is built for the journey <em>between them.</em></span>",""]];
+scene('#stats',(p,i)=>{swap($('#sn'),ST[i][0]);swap($('#sl'),ST[i][1])});
+// fragmentation
+const FL=['PLANNING','HOTELS','MAPS','WEATHER','TRANSPORT','BOOKINGS'],fi=$('#fi');FL.forEach(n=>{const d=document.createElement('div');d.textContent=n;fi.appendChild(d)});
+scene('#frag',p=>{const fh=$('#fh');swap(fh,p<.28?"Travel is connected.<br><em>The experience isn't.</em>":p<.52?"Your plan is static.<br>Reality isn't.":"");
+const k=p<.5?.35+p*1.7:p<.82?1.2*(1-Math.pow((p-.5)/.32,2.2)):0,W=innerWidth,H=innerHeight;[...fi.children].forEach((d,i)=>{const a=i/6*6.283+.5,x=Math.cos(a)*k*W*(W<821?.34:.38),y=Math.sin(a)*k*H*.34;d.style.transform=`translate(-50%,-50%) translate(${x}px,${y}px) scale(${.7+.3*Math.min(1,k)})`;d.style.opacity=p<.82?cl(p*7)*cl((.82-p)*9):0});
+const j=$('#fj'),s=$('#fs'),q=cl((p-.8)*6);j.style.opacity=q;j.style.transform=`scale(${1.5-.5*q})`;j.style.filter=`blur(${(1-q)*14}px)`;s.style.opacity=cl((p-.88)*8)});
+// manifesto
+const DF=["Most travel apps<br>help you plan.","<em>Navora</em><br>understands<br>the journey.","It simulates<br>change.","It helps the journey<br><em>adapt.</em>"];scene('#diff',(p,i)=>swap($('#dw'),DF[i]));
+// connected journey (organic)
+(()=>{const s=$('#cjs'),N=['TRAVELER','ITINERARY','WEATHER','HOTEL','MAP','TRANSPORT','BUDGET','SAFETY'],P=N.map((n,i)=>{const a=i/8*6.283-1.4;return{x:300+Math.cos(a)*215,y:260+Math.sin(a)*190,n,ox:0,oy:0}});let h='<circle cx="300" cy="260" r="70" fill="none" stroke="#d8bf8c" stroke-opacity=".5"/><circle class="rg" cx="300" cy="260" r="95" fill="none" stroke="#d8bf8c" stroke-opacity=".2"/><text x="300" y="264" text-anchor="middle" style="font-size:13px;font-weight:600">JOURNEY</text>';
+P.forEach((p,i)=>h+=`<line class="fl" stroke="#d8bf8c" stroke-opacity=".45"/><circle r="4" fill="#d8bf8c"/><text text-anchor="middle"></text>`);s.innerHTML=h;const L=[...s.querySelectorAll('line')],C=[...s.querySelectorAll('circle')].slice(2),T=[...s.querySelectorAll('text')].slice(1);let vis=0,mx=-999,my=-999;
+s.addEventListener('pointermove',e=>{const r=s.getBoundingClientRect();mx=(e.clientX-r.left)/r.width*600;my=(e.clientY-r.top)/r.height*520});s.addEventListener('pointerleave',()=>mx=-999);
+new IntersectionObserver(e=>{vis=e[0].isIntersecting;if(vis&&!RM)f()},{threshold:.1}).observe(s);
+function f(t=0){t/=1000;P.forEach((p,i)=>{let tx=Math.sin(t*.5+i*1.3)*10,ty=Math.cos(t*.4+i)*10;const d=Math.hypot(p.x-mx,p.y-my);if(d<130){tx+=(mx-p.x)*.2;ty+=(my-p.y)*.2}p.tx=tx;p.ty=ty});
+P.forEach((p,i)=>{const a=P[(i+7)%8],b=P[(i+1)%8];p.ox+=((p.tx+(a.tx+b.tx)*.3)-p.ox)*.06;p.oy+=((p.ty+(a.ty+b.ty)*.3)-p.oy)*.06;const x=p.x+p.ox,y=p.y+p.oy;L[i].setAttribute('x1',300);L[i].setAttribute('y1',260);L[i].setAttribute('x2',x);L[i].setAttribute('y2',y);C[i].setAttribute('cx',x);C[i].setAttribute('cy',y);T[i].setAttribute('x',x);T[i].setAttribute('y',y-14);T[i].textContent=p.n});if(vis&&!RM)requestAnimationFrame(f)}f()})();
+// brain
+(()=>{const I=['TRAVELER','WEATHER','TIME','LOCATION','BOOKING','BUDGET','ITINERARY'];let h='<g class="bp">';I.forEach((n,i)=>{const y=40+i*60,d=i*.25+'s';h+=`<text style="--d:${d}" x="0" y="${y+3}">${n}</text><path style="--d:${d}" d="M120 ${y} C 280 ${y},300 220,430 220" fill="none" stroke="#d8bf8c" stroke-opacity=".55"/>`});
+h+=`<path style="--d:2s" d="M520 220 H650" fill="none" stroke="#d8bf8c"/><text style="--d:2.6s" x="665" y="224" style="font-size:12px;font-weight:600">UNDERSTANDING</text></g><circle cx="475" cy="220" r="46" fill="none" stroke="#d8bf8c" stroke-opacity=".6"/><circle class="rg" cx="475" cy="220" r="72" fill="none" stroke="#d8bf8c" stroke-opacity=".25"/><circle class="rg" cx="475" cy="220" r="100" fill="none" stroke="#d8bf8c" stroke-opacity=".12"/><text x="475" y="224" text-anchor="middle" style="font-size:9px">TRAVEL BRAIN</text>`;const s=$('#bs');s.innerHTML=h;new IntersectionObserver(e=>e[0].isIntersecting&&s.classList.add('go'),{threshold:.4}).observe(s)})();
+// digital twin
+const CH=[...document.querySelectorAll('#chain li')];
+scene('#twin',(p,i)=>{$('#stg').style.transform=`scale(${1+p*.07})`;$('#wx').style.opacity=i>=1?1:0;$('#e3').classList.toggle('hit',i>=2&&i<4);
+const lit=i<3?-1:i>3?6:Math.floor(cl(p*6-3)*7)-1;CH.forEach((c,k)=>c.classList.toggle('on',k<=lit));
+swap($('#e3t'),i>=4?'Indoor experience · 3:30 PM (simulated)':'Outdoor Activity');swap($('#e4t'),i>=4?'Hotel · arrival re-timed':'Hotel');
+swap($('#th'),['A static plan.','See what changed.','See what changed.','See what it affects.','One change.<br>Multiple consequences.','Navora understands<br>the impact.'][i]);$('#pr').style.opacity=i>=5?1:0});
+// what-if
+const SC=[{q:"What if it rains tomorrow?",an:["WEATHER","ACTIVITY","ROUTE","TIME"],orig:"3:00 PM · Outdoor activity<br>Heavy rain expected",o:[["01","Indoor experience","3:30 PM","15 min","+₹300","3:30 PM · Indoor experience"],["02","Move outdoor activity","10:00 AM","20 min","₹0","10:00 AM · Outdoor activity"],["03","Remove activity","2 hrs saved","—","−₹1,000","Activity removed · 2 hrs free"]]},
+{q:"What if my budget changes?",an:["HOTEL","TRANSPORT","ACTIVITIES","MEALS"],orig:"₹30,000 · 3 days · 2 travelers",o:[["01","Simplify the stay","Same days","Closer hotel","→ ₹24,000","₹24,000 · simpler stay, same activities"],["02","Trim activities","Same days","Same","→ ₹24,000","₹24,000 · fewer paid activities"],["03","Rebalance all four","Same days","Shared transfers","→ ₹24,000","₹24,000 · reasoned across hotel, transport, activities, meals"]]},
+{q:"What if I extend my trip?",an:["BOOKINGS","ROUTE","BUDGET","STAY"],orig:"3 days · 2 travelers",o:[["01","Add a day","+1 day","Nearby","Recomputed","4 days · new day added"],["02","Slow the pace","Same","Same","Unchanged","3 days · gentler pacing"],["03","Extend the stay","+1 night","Same hotel","Recomputed","Same hotel · +1 night"]]}];
+let si=0,oi=0,ty,tm=[];
+function tabs(){$('#tabs').innerHTML=SC.map((s,i)=>`<button role="tab" class="${i==si?'a':''}" data-i="${i}">${s.q.replace('What if ','').replace('?','')}</button>`).join('');document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{si=+b.dataset.i;run()})}
+function run(){clearInterval(ty);tm.forEach(clearTimeout);tm=[];tabs();oi=0;const s=SC[si],p=$('#prompt');p.textContent='';$('#opts').innerHTML='';$('#cmp').innerHTML='';$('#apply').style.display='none';$('#st').textContent='';$('#an').style.opacity=0;let k=0;
+ty=setInterval(()=>{p.textContent=s.q.slice(0,++k);if(k>=s.q.length){clearInterval(ty);tm.push(setTimeout(()=>{$('#an').style.opacity=1;let j=0;$('#at').innerHTML='ANALYZING JOURNEY… <span class="t"></span>';const a=setInterval(()=>{$('#at span.t').textContent=s.an[j%4];j++},350);tm.push(setTimeout(()=>{clearInterval(a);$('#at').textContent=(RM?'':'')+'3 POSSIBLE FUTURES';opts()},1500))},500))}},RM?1:38)}
+function opts(){const s=SC[si];$('#opts').innerHTML=s.o.map((o,i)=>`<button class="glass op ${i==oi?'a':''}" data-i="${i}"><div><b>OPTION ${o[0]}</b><h4>${o[1]}</h4></div><div class="mt"><div>TIME<i>${o[2]}</i></div><div>TRAVEL<i>${o[3]}</i></div><div>BUDGET<i>${o[4]}</i></div></div></button>`).join('');
+[...document.querySelectorAll('.op')].forEach((b,i)=>{setTimeout(()=>b.classList.add('in'),RM?0:i*350);b.onclick=()=>{oi=i;document.querySelectorAll('.op').forEach((x,j)=>x.classList.toggle('a',j==i));cmp()}});cmp();$('#apply').style.display='inline-flex';$('#st').textContent='Alternatives are simulated first. Nothing changes until you approve.'}
+function cmp(){const s=SC[si],o=s.o[oi];$('#cmp').innerHTML=`<div><small>ORIGINAL</small>${s.orig}</div><div class="n"><small>SIMULATED · OPTION ${o[0]}</small>${o[5]}</div>`}
+$('#apply').onclick=()=>{document.querySelectorAll('.op').forEach((x,j)=>{if(j!=oi)x.classList.add('off')});const s=SC[si];$('#cmp').innerHTML=`<div class="n" style="grid-column:1/-1"><small>NEW JOURNEY</small>${s.o[oi][5]}</div>`;$('#apply').style.display='none';$('#st').innerHTML='✓ The chosen future becomes the Journey. <a href="https://plan-my-tripp.vercel.app/" style="color:var(--gold)">Try it in the real product →</a>'};
+new IntersectionObserver((e,o)=>{if(e[0].isIntersecting){run();o.disconnect()}},{threshold:.3}).observe($('#sim'));
+// stay
+(()=>{const T=['LOCATION','TIME','BUDGET','ROUTE','ITINERARY'];let h='<path d="M60 400 V200 A130 130 0 0 1 320 200 V400" fill="none" stroke="rgba(245,243,238,.07)"/><circle cx="130" cy="220" r="6" fill="#d8bf8c"/><text x="130" y="250" text-anchor="middle">HOTEL</text><g class="bp">';
+T.forEach((n,i)=>{const y=50+i*85,d=i*.3+'s';h+=`<path style="--d:${d}" d="M136 220 C 260 220,300 ${y},420 ${y}" fill="none" stroke="#d8bf8c" stroke-opacity=".55"/><text style="--d:${d}" x="430" y="${y+3}">${n}</text>`});
+h+=`</g><circle class="rg" cx="560" cy="220" r="40" fill="none" stroke="#d8bf8c" stroke-opacity=".5"/><text x="560" y="224" text-anchor="middle" style="fill:#d8bf8c">JOURNEY</text>`;const s=$('#sv');s.innerHTML=h;new IntersectionObserver(e=>e[0].isIntersecting&&s.classList.add('go'),{threshold:.4}).observe(s)})();
+// loop (continuous path)
+(()=>{const S=['PLAN','UNDERSTAND','DETECT','ANALYZE','SIMULATE','RECOMMEND','APPROVE','ADAPT'],cx=380,cy=200,rx=300,ry=135;let h=`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="none" stroke="rgba(216,191,140,.35)"/><text id="lc" x="${cx}" y="${cy+4}" text-anchor="middle" style="font-size:13px;font-weight:600;fill:#d8bf8c">JOURNEY</text>`;
+S.forEach((n,i)=>{const a=i/8*6.283-1.5708,x=cx+Math.cos(a)*rx,y=cy+Math.sin(a)*ry;h+=`<circle class="lp" cx="${x}" cy="${y}" r="3" fill="#555"/><text class="lt" x="${x}" y="${y+(y<cy?-16:24)}" text-anchor="middle" style="fill:#666">${n}</text>`});h+='<circle id="ld" r="6" fill="#d8bf8c"/>';const s=$('#ls');s.innerHTML=h;const P=[...s.querySelectorAll('.lp')],Tt=[...s.querySelectorAll('.lt')],D=$('#ld');let vis=0;
+new IntersectionObserver(e=>{vis=e[0].isIntersecting;if(vis)f(performance.now())},{threshold:.1}).observe(s);
+function f(t){const u=(t/16000)%1,a=u*6.283-1.5708;D.setAttribute('cx',cx+Math.cos(a)*rx);D.setAttribute('cy',cy+Math.sin(a)*ry);const k=Math.floor(u*8+.15)%8;P.forEach((c,i)=>{c.setAttribute('fill',i==k?'#d8bf8c':'#555');Tt[i].style.fill=i==k?'#f5f3ee':'#666'});$('#lc').textContent=k==7?'TRAVEL WITH CONFIDENCE':'JOURNEY';if(vis&&!RM)requestAnimationFrame(f)}f(0)})();
+// finale
+const FN=[["4.287B","DOMESTIC TOURIST VISITS"],["What if even one journey<br>could adapt better?",""],["What if<br><em>millions</em> could?","A future vision — not a claim about today."],["<i class='dot'></i>",""],["Navora","Travel with confidence"],["Travel should<br>adapt to you.","Not the other way around."]];
+scene('#fin',(p,i)=>{swap($('#fn'),FN[i][0]);swap($('#fc'),FN[i][1]);$('#fb').classList.toggle('on',i==5);$('#fn').style.fontSize=i==1||i==2||i==5?'clamp(36px,8vw,120px)':''});
+// hero network
+(()=>{const c=$('#cv'),x=c.getContext('2d'),L=['PLACE','TIME','WEATHER','HOTEL','ACTIVITY','ROUTE'];let W,H,N=[],mx=-999,my=-999,PU=[];
+function rs(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;N=Array.from({length:W<700?16:30},(_,i)=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,l:i<6?L[i]:null}))}rs();addEventListener('resize',rs);
+addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});
+function f(){x.clearRect(0,0,W,H);N.forEach(n=>{if(!RM){n.x+=n.vx;n.y+=n.vy;const d=Math.hypot(n.x-mx,n.y-my);if(d<180){n.x+=(mx-n.x)*.002;n.y+=(my-n.y)*.002}}if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1});
+N.forEach((a,i)=>N.slice(i+1).forEach(b=>{const d=Math.hypot(a.x-b.x,a.y-b.y);if(d<230){const m=Math.min(Math.hypot(a.x-mx,a.y-my),Math.hypot(b.x-mx,b.y-my))<170?2.2:1;x.strokeStyle=`rgba(216,191,140,${.16*m*(1-d/230)})`;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}));
+if(!RM&&Math.random()<.05){const a=N[Math.random()*N.length|0],b=N[Math.random()*N.length|0];if(Math.hypot(a.x-b.x,a.y-b.y)<230)PU.push({a,b,t:0})}PU=PU.filter(u=>(u.t+=.012)<1);PU.forEach(u=>{x.fillStyle='rgba(255,236,190,.9)';x.beginPath();x.arc(u.a.x+(u.b.x-u.a.x)*u.t,u.a.y+(u.b.y-u.a.y)*u.t,2.2,0,7);x.fill()});N.forEach(n=>{x.fillStyle=n.l?'#d8bf8c':'rgba(245,243,238,.35)';x.beginPath();x.arc(n.x,n.y,n.l?3:1.6,0,7);x.fill();if(n.l){x.font='9px sans-serif';x.fillStyle='rgba(245,243,238,.45)';x.fillText(n.l.split('').join(' '),n.x+9,n.y+3)}});if(!RM)requestAnimationFrame(f)}f()})();
+onS();
+/* ===== NEXT LEVEL LAYER ===== */
+(()=>{const D=document.documentElement,fine=matchMedia('(pointer:fine)').matches;
+// loader + hero choreography
+[...$('#hero').children].filter(e=>e.tagName!='CANVAS'&&e.tagName!='H1').forEach((e,i)=>{e.classList.add('hh');e.style.setProperty('--d',i*.25)});
+const go=()=>{$('#ld').classList.add('x');document.body.classList.add('rd')};setTimeout(go,RM?0:2000);
+// split headline words (mask rise)
+document.querySelectorAll('h2.rv').forEach(h=>{let n=0;const walk=el=>[...el.childNodes].forEach(c=>{if(c.nodeType==3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(t=>{if(!t.trim()){f.append(t);return}const w=document.createElement('span');w.className='w';w.innerHTML=`<i style="--i:${n++}">${t}</i>`;f.append(w)});c.replaceWith(f)}else if(c.nodeType==1&&c.tagName!='BR')walk(c)});walk(h)});
+// count-up on stat numbers
+const sn=$('#sn');let busy=0;new MutationObserver(()=>{if(busy||RM)return;const m=sn.textContent.match(/^([\d.]+)(.*)$/);if(!m)return;busy=1;const v=parseFloat(m[1]),d=(m[1].split('.')[1]||'').length,t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/1700),e=1-Math.pow(1-k,4);sn.textContent=(v*e).toFixed(d)+m[2];if(k<1)requestAnimationFrame(f);else setTimeout(()=>busy=0,60)})(t0)}).observe(sn,{childList:true,characterData:true,subtree:true});
+// spotlight on glass
+addEventListener('pointermove',e=>{const g=e.target.closest&&e.target.closest('.glass');if(g){const r=g.getBoundingClientRect();g.style.setProperty('--mx',e.clientX-r.left+'px');g.style.setProperty('--my',e.clientY-r.top+'px')}},{passive:true});
+// chapter rail
+const CH=[['hero','Intro'],['stats','Scale'],['frag','Fragments'],['diff','Difference'],['cj','Journey'],['brain','Brain'],['twin','Digital Twin'],['whatif','What-If'],['stay','Stay'],['loop','Loop'],['demo','Demo'],['fin','Finale']],rl=$('#rail');
+rl.innerHTML=CH.map(c=>`<a href="#${c[0]}" data-l="${c[1]}" aria-label="${c[1]}"></a>`).join('');const ra=[...rl.children];
+// cursor
+const cu=$('#cur');let cx=-100,cy=-100,tx=-100,ty=-100;if(fine&&!RM){document.body.classList.add('cc');addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;cu.classList.add('on');cu.classList.toggle('h',!!e.target.closest('a,button,.op'))});document.addEventListener('pointerleave',()=>cu.classList.remove('on'))}
+// master loop: scroll progress, velocity skew, hero parallax, cursor
+let ly=scrollY,sk=0,mxr=0,myr=0;addEventListener('pointermove',e=>{mxr=e.clientX/innerWidth-.5;myr=e.clientY/innerHeight-.5});
+(function t(){const y=scrollY,d=y-ly;ly=y;if(!RM){sk+=(Math.max(-1.4,Math.min(1.4,d*.04))-sk)*.1;D.style.setProperty('--sk',Math.abs(sk)<.005?'0deg':sk.toFixed(3)+'deg');
+const hp=Math.min(1,y/innerHeight);D.style.setProperty('--hy',y);D.style.setProperty('--hb',(hp*10).toFixed(2));D.style.setProperty('--hsc',(1-hp*.12).toFixed(3));D.style.setProperty('--mx2',(mxr*-24).toFixed(1)+'px');D.style.setProperty('--my2',(myr*-16).toFixed(1)+'px');
+cx+=(tx-cx)*.18;cy+=(ty-cy)*.18;cu.style.transform=`translate3d(${cx}px,${cy}px,0)`}
+D.style.setProperty('--p',(y/(D.scrollHeight-innerHeight||1)).toFixed(4));
+ra.forEach((a,i)=>{const r=document.getElementById(CH[i][0]).getBoundingClientRect();a.classList.toggle('a',r.top<innerHeight*.5&&r.bottom>innerHeight*.5)});requestAnimationFrame(t)})();
+})();
+</script></body></html>
